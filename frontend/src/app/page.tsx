@@ -1,16 +1,16 @@
 'use client';
 
 /**
- * Home Page - Landing Page
- * Enhanced design with better visual hierarchy and spacing
- * Hero, Services Preview, Gallery Preview, Testimonials, CTA
+ * Home Page - Redesigned Landing Page
+ * Modern, elegant design with enhanced UX and animations
+ * Fully responsive across all devices
  */
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, Sparkles, Calendar, Users, Award, Zap, Heart, Eye, Gem } from 'lucide-react';
+import { ArrowRight, Star, Sparkles, Calendar, Users, Award, Zap, Heart, Eye, Gem, CheckCircle2, TrendingUp } from 'lucide-react';
 import { getGalleryImages, getTestimonials, GalleryImage, Testimonial } from '@/lib/api';
 
 // Services data
@@ -113,99 +113,207 @@ export default function HomePage() {
     <>
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-primary to-bg-secondary" />
+        {/* Enhanced background with mesh gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary" />
         
-        {/* Animated background elements */}
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'linear-gradient(rgba(198, 164, 94, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(198, 164, 94, 0.5) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }} />
+        
+        {/* Enhanced animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute top-10% left-5% w-72 h-72 bg-gold/10 rounded-full blur-3xl"
-            animate={{ y: [0, 30, 0] }}
-            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-gold/10 rounded-full blur-[100px]"
+            animate={{ 
+              y: [0, 50, 0],
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute bottom-10% right-5% w-96 h-96 bg-gold/5 rounded-full blur-3xl"
-            animate={{ y: [0, -30, 0] }}
-            transition={{ duration: 10, repeat: Infinity }}
+            className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-gold/8 rounded-full blur-[120px]"
+            animate={{ 
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute top-1/3 right-1/4 w-64 h-64 bg-gold/5 rounded-full blur-3xl"
-            animate={{ x: [0, 30, 0] }}
-            transition={{ duration: 12, repeat: Infinity }}
+            className="absolute top-[40%] right-[20%] w-[400px] h-[400px] bg-gold/6 rounded-full blur-[80px]"
+            animate={{ 
+              x: [0, 50, 0],
+              scale: [1, 1.15, 1]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
 
-        {/* Content */}
-        <div className="container relative z-10 max-w-5xl px-4 sm:px-6 lg:px-8">
+        {/* Floating particles - using fixed positions to avoid hydration mismatch */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[
+            { left: 10, top: 20, duration: 4, delay: 0 },
+            { left: 25, top: 45, duration: 3.5, delay: 0.5 },
+            { left: 40, top: 15, duration: 4.5, delay: 1 },
+            { left: 55, top: 60, duration: 3.8, delay: 0.3 },
+            { left: 70, top: 35, duration: 4.2, delay: 0.8 },
+            { left: 85, top: 70, duration: 3.6, delay: 1.2 },
+            { left: 15, top: 80, duration: 4.3, delay: 0.6 },
+            { left: 30, top: 50, duration: 3.9, delay: 1.5 },
+            { left: 50, top: 25, duration: 4.1, delay: 0.2 },
+            { left: 65, top: 85, duration: 3.7, delay: 1.8 },
+            { left: 80, top: 40, duration: 4.4, delay: 0.9 },
+            { left: 20, top: 65, duration: 3.4, delay: 1.3 },
+            { left: 45, top: 10, duration: 4.6, delay: 0.4 },
+            { left: 60, top: 55, duration: 3.3, delay: 1.6 },
+            { left: 75, top: 30, duration: 4.7, delay: 0.7 },
+            { left: 90, top: 75, duration: 3.2, delay: 1.1 },
+            { left: 35, top: 90, duration: 4.8, delay: 1.4 },
+            { left: 5, top: 50, duration: 3.1, delay: 0.1 },
+            { left: 95, top: 20, duration: 4.9, delay: 1.7 },
+            { left: 50, top: 70, duration: 3.5, delay: 1.9 },
+          ].map((particle, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-gold/20 rounded-full"
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                delay: particle.delay,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Content - CONSISTENT CONTAINER */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {/* Badge */}
+            {/* Enhanced Badge with glow */}
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold/10 border border-gold/40 mb-6 sm:mb-8 backdrop-blur-sm shadow-[0_0_20px_rgba(198,164,94,0.15)]"
             >
-              <Sparkles className="w-4 h-4 text-gold" />
-              <span className="text-xs sm:text-sm text-gold font-medium uppercase tracking-wider">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-4 h-4 text-gold" />
+              </motion.div>
+              <span className="text-xs sm:text-sm text-gold font-semibold uppercase tracking-[0.2em]">
                 Luxury Event Management
               </span>
             </motion.div>
 
-            {/* Main heading */}
+            {/* Enhanced Main heading with better typography */}
             <motion.h1
               variants={itemVariants}
-              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 sm:mb-8 leading-tight"
+              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6 sm:mb-8 leading-[1.1] tracking-tight"
             >
               Craft Your{' '}
-              <span className="gold-gradient inline-block">Perfect Moment</span>
+              <span className="relative inline-block">
+                <span className="gold-gradient">Perfect Moment</span>
+                <motion.div
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1, duration: 0.8 }}
+                />
+              </span>
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Enhanced Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-text-secondary max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-14 leading-relaxed font-light"
             >
               Transform your vision into an unforgettable experience. From intimate gatherings to grand celebrations, 
               we create moments that resonate for a lifetime.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* Enhanced CTA Buttons with better hover effects */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16"
             >
               <Link
                 href="/contact"
-                className="group relative px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-bg-primary font-semibold uppercase text-sm tracking-wider overflow-hidden transition-all duration-300 hover:shadow-gold w-full sm:w-auto"
+                className="group relative px-10 py-5 bg-gradient-to-r from-gold via-gold-light to-gold text-bg-primary font-bold uppercase text-sm tracking-[0.15em] overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,164,94,0.4)] w-full sm:w-auto bg-[length:200%_100%] hover:bg-right"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Start Your Journey
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-gold-light to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
               <Link
                 href="/gallery"
-                className="px-8 py-4 border-2 border-gold text-gold hover:bg-gold/10 font-semibold uppercase text-sm tracking-wider transition-all duration-300 w-full sm:w-auto"
+                className="group relative px-10 py-5 border-2 border-gold text-gold hover:bg-gold hover:text-bg-primary font-bold uppercase text-sm tracking-[0.15em] transition-all duration-300 w-full sm:w-auto overflow-hidden"
               >
-                View Our Portfolio
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  View Our Portfolio
+                  <motion.span
+                    className="inline-block"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </span>
               </Link>
             </motion.div>
 
-            {/* Scroll indicator */}
+            {/* Trust indicators */}
             <motion.div
               variants={itemVariants}
-              className="mt-12 sm:mt-16"
+              className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-12 mb-12 sm:mb-16 text-text-secondary text-xs sm:text-sm"
+            >
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-gold" />
+                <span>500+ Events</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-gold" />
+                <span>98% Satisfaction</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-gold" />
+                <span>15+ Years</span>
+              </div>
+            </motion.div>
+
+            {/* Enhanced Scroll indicator */}
+            <motion.div
+              variants={itemVariants}
+              className="mt-8 sm:mt-12"
             >
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="flex justify-center"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex flex-col items-center gap-2"
               >
-                <div className="w-8 h-12 border-2 border-gold/30 rounded-full flex justify-center p-2">
-                  <motion.div className="w-1 h-2 bg-gold rounded-full" />
+                <span className="text-xs text-text-muted uppercase tracking-wider">Scroll to explore</span>
+                <div className="w-6 h-10 border-2 border-gold/40 rounded-full flex justify-center p-1.5">
+                  <motion.div 
+                    className="w-1 h-2 bg-gold rounded-full"
+                    animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  />
                 </div>
               </motion.div>
             </motion.div>
@@ -214,37 +322,71 @@ export default function HomePage() {
       </section>
 
       {/* ==================== STATS SECTION ==================== */}
-      <section className="relative py-12 sm:py-16 md:py-20 bg-gradient-to-r from-bg-secondary via-bg-primary to-bg-secondary border-t border-b border-gold/10">
+      <section className="relative py-20 bg-gradient-to-r from-bg-secondary via-bg-primary to-bg-secondary border-y border-gold/10">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            {stats.map((stat) => (
+            {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="text-center group"
+                className="relative text-center group"
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex justify-center mb-3 sm:mb-4">
-                  <div className="p-3 bg-gold/10 rounded-lg group-hover:bg-gold/20 transition-colors">
-                    <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold" />
+                {/* Background glow on hover */}
+                <div className="absolute inset-0 bg-gold/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                
+                <div className="relative">
+                  {/* Icon with enhanced styling */}
+                  <div className="flex justify-center mb-4 sm:mb-5">
+                    <motion.div 
+                      className="relative p-4 bg-gradient-to-br from-gold/10 to-gold/5 rounded-2xl group-hover:from-gold/20 group-hover:to-gold/10 transition-all duration-300 shadow-lg"
+                      whileHover={{ rotate: [0, -10, 10, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <stat.icon className="w-7 h-7 sm:w-9 sm:h-9 text-gold" />
+                      
+                      {/* Decorative corner accents */}
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-gold/30 rounded-tl" />
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-gold/30 rounded-br" />
+                    </motion.div>
                   </div>
+                  
+                  {/* Animated counter */}
+                  <motion.span 
+                    className="block text-3xl sm:text-4xl md:text-5xl font-heading gold-gradient mb-2 sm:mb-3"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5, type: "spring" }}
+                  >
+                    {stat.value}
+                  </motion.span>
+                  
+                  <span className="text-xs sm:text-sm text-text-secondary uppercase tracking-[0.15em] font-semibold">
+                    {stat.label}
+                  </span>
+                  
+                  {/* Decorative line */}
+                  <motion.div 
+                    className="mx-auto mt-3 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "60%" }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
+                  />
                 </div>
-                <span className="block text-2xl sm:text-3xl md:text-4xl font-heading gold-gradient mb-2">
-                  {stat.value}
-                </span>
-                <span className="text-xs sm:text-sm text-text-secondary uppercase tracking-wider">
-                  {stat.label}
-                </span>
               </motion.div>
             ))}
           </motion.div>
@@ -252,20 +394,34 @@ export default function HomePage() {
       </section>
 
       {/* ==================== SERVICES SECTION ==================== */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="container max-w-6xl">
+      <section className="relative py-20 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+            className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">
+            <motion.div
+              className="inline-block mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-gold text-sm font-semibold uppercase tracking-[0.2em]">What We Offer</span>
+            </motion.div>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 leading-tight">
               Our Premium <span className="gold-gradient">Services</span>
             </h2>
-            <p className="text-text-secondary text-sm sm:text-base md:text-lg">
-              Comprehensive event solutions tailored to bring your unique vision to life
+            <p className="text-text-secondary text-base sm:text-lg md:text-xl leading-relaxed">
+              Comprehensive event solutions tailored to bring your unique vision to life with unmatched elegance
             </p>
           </motion.div>
 
@@ -281,94 +437,172 @@ export default function HomePage() {
                 key={service.title}
                 variants={itemVariants}
                 className="group relative"
+                whileHover={{ y: -12 }}
+                transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
               >
-                <div className="relative p-6 sm:p-7 md:p-8 bg-bg-secondary border border-border rounded-lg hover:border-gold/50 transition-all duration-300 h-full overflow-hidden">
-                  {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                <Link href="/services" className="block h-full">
+                  <div className="relative p-7 sm:p-8 bg-bg-secondary border border-border hover:border-gold/60 transition-all duration-500 h-full overflow-hidden rounded-xl">
+                    {/* Animated gradient background */}
+                    <motion.div 
+                      className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                      initial={false}
+                    />
+                    
+                    {/* Shine effect on hover */}
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                      initial={false}
+                      style={{
+                        background: 'linear-gradient(45deg, transparent 30%, rgba(198, 164, 94, 0.1) 50%, transparent 70%)',
+                        backgroundSize: '200% 200%',
+                      }}
+                      animate={{
+                        backgroundPosition: ['0% 0%', '100% 100%'],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: 'reverse',
+                      }}
+                    />
 
-                  <div className="relative z-10">
-                    {/* Icon */}
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gold/10 rounded-xl flex items-center justify-center mb-4 sm:mb-5 md:mb-6 group-hover:bg-gold/20 transition-colors">
-                      <service.icon className="w-7 h-7 sm:w-8 sm:h-8 text-gold" />
+                    <div className="relative z-10">
+                      {/* Enhanced Icon */}
+                      <motion.div 
+                        className="relative w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br from-gold/15 to-gold/5 rounded-2xl flex items-center justify-center mb-6 group-hover:from-gold/25 group-hover:to-gold/10 transition-all duration-300 shadow-lg"
+                        whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <service.icon className="w-8 h-8 sm:w-9 sm:h-9 text-gold" />
+                        
+                        {/* Corner decorations */}
+                        <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-gold/40 rounded-tl-lg" />
+                        <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-gold/40 rounded-br-lg" />
+                      </motion.div>
+
+                      {/* Title with better typography */}
+                      <h3 className="font-heading text-xl sm:text-2xl mb-4 group-hover:text-gold transition-colors duration-300 leading-tight">
+                        {service.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-text-secondary text-sm sm:text-base leading-relaxed mb-6">
+                        {service.description}
+                      </p>
+
+                      {/* Enhanced Link */}
+                      <div className="flex items-center text-gold text-sm font-bold gap-2 group-hover:gap-4 transition-all duration-300">
+                        <span className="uppercase tracking-wider">Learn More</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-heading text-lg sm:text-xl mb-3 sm:mb-4 group-hover:text-gold transition-colors">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
-                      {service.description}
-                    </p>
-
-                    {/* Link */}
-                    <div className="flex items-center text-gold text-sm font-semibold gap-2 group-hover:gap-3 transition-all">
-                      Learn More
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {/* Number indicator */}
+                    <div className="absolute top-4 right-4 text-6xl font-heading text-gold/5 group-hover:text-gold/10 transition-colors duration-300">
+                      {(index + 1).toString().padStart(2, '0')}
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div
-            className="text-center mt-12 sm:mt-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="text-center mt-16 sm:mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
           >
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-gold text-gold hover:bg-gold/10 font-semibold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-gold text-gold hover:bg-gold hover:text-bg-primary font-bold uppercase text-sm tracking-[0.15em] transition-all duration-300 relative overflow-hidden"
             >
-              Explore All Services
-              <ArrowRight className="w-4 h-4" />
+              <span className="relative z-10">Explore All Services</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* ==================== WHY CHOOSE US SECTION ==================== */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-bg-secondary">
-        <div className="container max-w-6xl">
+      <section className="relative py-20 bg-bg-secondary overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-10 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+            className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">
+            <motion.div
+              className="inline-block mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-gold text-sm font-semibold uppercase tracking-[0.2em]">Our Advantage</span>
+            </motion.div>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 leading-tight">
               Why Choose <span className="gold-gradient">Luxe Events</span>
             </h2>
-            <p className="text-text-secondary text-sm sm:text-base md:text-lg">
-              Partner with award-winning event experts who prioritize your vision
+            <p className="text-text-secondary text-base sm:text-lg md:text-xl leading-relaxed">
+              Partner with award-winning event experts who prioritize your vision and deliver excellence
             </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8 md:gap-10 max-w-5xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            {whyChooseUs.map((item) => (
+            {whyChooseUs.map((item, index) => (
               <motion.div
                 key={item.title}
                 variants={itemVariants}
-                className="flex gap-4 sm:gap-6 p-6 sm:p-7 bg-bg-primary rounded-lg border border-border hover:border-gold/30 transition-all"
+                className="group relative"
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-lg bg-gold/10">
-                    <item.icon className="h-6 w-6 sm:h-7 sm:w-7 text-gold" />
+                <div className="relative flex gap-5 sm:gap-6 p-7 sm:p-8 bg-bg-primary rounded-xl border border-border hover:border-gold/50 transition-all duration-500 h-full overflow-hidden">
+                  {/* Background glow on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative z-10 flex-shrink-0">
+                    <motion.div 
+                      className="flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 group-hover:from-gold/25 group-hover:to-gold/10 transition-all duration-300 shadow-lg"
+                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.05 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <item.icon className="h-7 w-7 sm:h-8 sm:w-8 text-gold" />
+                    </motion.div>
                   </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-heading text-lg sm:text-xl mb-2">{item.title}</h3>
-                  <p className="text-text-secondary text-sm">{item.description}</p>
+                  
+                  <div className="relative z-10 flex-1">
+                    <h3 className="font-heading text-xl sm:text-2xl mb-3 group-hover:text-gold transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Number indicator */}
+                  <div className="absolute bottom-4 right-4 text-5xl font-heading text-gold/5 group-hover:text-gold/10 transition-colors duration-300">
+                    {(index + 1).toString().padStart(2, '0')}
+                  </div>
+
+                  {/* Corner accent */}
+                  <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 rounded-tr-lg" />
                 </div>
               </motion.div>
             ))}
@@ -377,19 +611,30 @@ export default function HomePage() {
       </section>
 
       {/* ==================== GALLERY PREVIEW SECTION ==================== */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="container max-w-6xl">
+      <section className="relative py-20 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-secondary to-bg-primary" />
+        
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+            className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">
+            <motion.div
+              className="inline-block mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-gold text-sm font-semibold uppercase tracking-[0.2em]">Portfolio</span>
+            </motion.div>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 leading-tight">
               Our Latest <span className="gold-gradient">Creations</span>
             </h2>
-            <p className="text-text-secondary text-sm sm:text-base md:text-lg">
+            <p className="text-text-secondary text-base sm:text-lg md:text-xl leading-relaxed">
               Stunning events that showcase our excellence and creativity
             </p>
           </motion.div>
@@ -399,77 +644,116 @@ export default function HomePage() {
               galleryImages.map((image, index) => (
                 <motion.div
                   key={image._id}
-                  className="group relative overflow-hidden rounded-lg aspect-[4/3] cursor-pointer"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
+                  initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  whileHover={{ y: -12 }}
                 >
-                  <Image
-                    src={image.imageUrl}
-                    alt={image.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span className="text-gold text-xs uppercase tracking-wider font-semibold mb-2">
-                      {image.category}
-                    </span>
-                    <h4 className="text-white font-heading text-lg sm:text-xl">
-                      {image.title}
-                    </h4>
-                  </div>
+                  <Link href="/gallery" className="block h-full">
+                    <div className="relative h-full">
+                      <Image
+                        src={image.imageUrl}
+                        alt={image.title}
+                        fill
+                        className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      
+                      {/* Enhanced Overlay with gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                      
+                      {/* Content */}
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <motion.span 
+                          className="text-gold text-xs uppercase tracking-[0.2em] font-bold mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100"
+                          initial={false}
+                        >
+                          {image.category}
+                        </motion.span>
+                        <h4 className="text-white font-heading text-xl sm:text-2xl mb-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                          {image.title}
+                        </h4>
+                        
+                        {/* View button */}
+                        <motion.div 
+                          className="flex items-center gap-2 text-gold text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200"
+                          initial={false}
+                        >
+                          <span className="uppercase tracking-wider">View Project</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.div>
+                      </div>
 
-                  {/* Border */}
-                  <div className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/50 transition-colors rounded-lg" />
+                      {/* Animated Border */}
+                      <div className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/60 transition-all duration-500 rounded-2xl" />
+                      
+                      {/* Corner accents */}
+                      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-gold/0 group-hover:border-gold/60 transition-all duration-500 rounded-tl-lg" />
+                      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-gold/0 group-hover:border-gold/60 transition-all duration-500 rounded-br-lg" />
+                    </div>
+                  </Link>
                 </motion.div>
               ))
             ) : (
               [...Array(6)].map((_, index) => (
                 <div
                   key={index}
-                  className="aspect-[4/3] bg-bg-tertiary animate-pulse rounded-lg"
+                  className="aspect-[4/3] bg-bg-tertiary animate-pulse rounded-2xl"
                 />
               ))
             )}
           </div>
 
           <motion.div
-            className="text-center mt-12 sm:mt-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="text-center mt-16 sm:mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
           >
             <Link
               href="/gallery"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-gold text-gold hover:bg-gold/10 font-semibold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-gold text-gold hover:bg-gold hover:text-bg-primary font-bold uppercase text-sm tracking-[0.15em] transition-all duration-300 relative overflow-hidden"
             >
-              View Full Gallery
-              <ArrowRight className="w-4 h-4" />
+              <span className="relative z-10">View Full Gallery</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* ==================== TESTIMONIALS SECTION ==================== */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-bg-secondary">
-        <div className="container max-w-6xl">
+      <section className="relative py-20 bg-bg-secondary overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 right-10 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-10 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+            className="text-center max-w-3xl mx-auto mb-16 sm:mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">
+            <motion.div
+              className="inline-block mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-gold text-sm font-semibold uppercase tracking-[0.2em]">Testimonials</span>
+            </motion.div>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 leading-tight">
               Client <span className="gold-gradient">Success Stories</span>
             </h2>
-            <p className="text-text-secondary text-sm sm:text-base md:text-lg">
-              Real feedback from our satisfied clients
+            <p className="text-text-secondary text-base sm:text-lg md:text-xl leading-relaxed">
+              Real feedback from our satisfied clients who trusted us with their special moments
             </p>
           </motion.div>
 
@@ -485,35 +769,77 @@ export default function HomePage() {
                 <motion.div
                   key={testimonial._id}
                   variants={itemVariants}
-                  className="group p-6 sm:p-7 md:p-8 bg-bg-primary border border-border rounded-lg hover:border-gold/50 transition-all"
+                  className="group relative"
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className={`${i < testimonial.rating
-                          ? 'text-gold fill-gold'
-                          : 'text-border'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <div className="relative p-7 sm:p-8 bg-bg-primary border border-border hover:border-gold/50 transition-all duration-500 h-full rounded-xl overflow-hidden">
+                    {/* Background glow on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10">
+                      {/* Quote icon */}
+                      <div className="absolute -top-2 -left-2 text-6xl text-gold/10 font-heading leading-none">&ldquo;</div>
+                      
+                      {/* Stars with animation */}
+                      <div className="flex gap-1 mb-5 relative">
+                        {[...Array(5)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 + i * 0.05 }}
+                          >
+                            <Star
+                              size={18}
+                              className={`${i < testimonial.rating
+                                ? 'text-gold fill-gold'
+                                : 'text-border'
+                              } transition-all duration-300`}
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
 
-                  {/* Testimonial text */}
-                  <p className="text-text-secondary text-sm sm:text-base italic leading-relaxed mb-6 sm:mb-8 min-h-20">
-                    &ldquo;{testimonial.message}&rdquo;
-                  </p>
-
-                  {/* Divider */}
-                  <div className="border-t border-border pt-4 sm:pt-6">
-                    <p className="font-heading text-base sm:text-lg mb-1">{testimonial.name}</p>
-                    {testimonial.eventType && (
-                      <p className="text-gold text-xs sm:text-sm font-medium uppercase tracking-wider">
-                        {testimonial.eventType}
+                      {/* Testimonial text */}
+                      <p className="text-text-secondary text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 min-h-[80px] relative">
+                        &ldquo;{testimonial.message}&rdquo;
                       </p>
-                    )}
+
+                      {/* Divider with animation */}
+                      <motion.div 
+                        className="border-t border-gold/20 pt-5 sm:pt-6"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Avatar placeholder */}
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 flex items-center justify-center flex-shrink-0">
+                            <span className="text-gold font-heading text-lg">
+                              {testimonial.name.charAt(0)}
+                            </span>
+                          </div>
+                          
+                          <div className="flex-1">
+                            <p className="font-heading text-base sm:text-lg mb-1 text-text-primary">
+                              {testimonial.name}
+                            </p>
+                            {testimonial.eventType && (
+                              <p className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-wider">
+                                {testimonial.eventType}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Corner decorations */}
+                    <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 rounded-tr-lg" />
+                    <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 rounded-bl-lg" />
                   </div>
                 </motion.div>
               ))
@@ -521,60 +847,143 @@ export default function HomePage() {
               [...Array(3)].map((_, index) => (
                 <div
                   key={index}
-                  className="h-72 bg-bg-tertiary animate-pulse rounded-lg"
+                  className="h-80 bg-bg-tertiary animate-pulse rounded-xl"
                 />
               ))
             )}
           </motion.div>
 
           <motion.div
-            className="text-center mt-12 sm:mt-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="text-center mt-16 sm:mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
           >
             <Link
               href="/testimonials"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-gold text-gold hover:bg-gold/10 font-semibold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-gold text-gold hover:bg-gold hover:text-bg-primary font-bold uppercase text-sm tracking-[0.15em] transition-all duration-300 relative overflow-hidden"
             >
-              Read More Stories
-              <ArrowRight className="w-4 h-4" />
+              <span className="relative z-10">Read More Stories</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* ==================== CTA SECTION ==================== */}
-      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden px-4 sm:px-6 lg:px-8">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary via-bg-secondary to-bg-primary" />
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gold rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold rounded-full blur-3xl" />
+      <section className="relative py-20 overflow-hidden">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary" />
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <motion.div 
+            className="absolute top-0 left-0 w-[500px] h-[500px] bg-gold/15 rounded-full blur-[120px]"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gold/10 rounded-full blur-[140px]"
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
 
-        <div className="container relative z-10 max-w-4xl">
+        {/* Decorative grid */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(rgba(198, 164, 94, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(198, 164, 94, 0.5) 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
+        }} />
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center"
+            className="relative max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">
-              Ready to Create Your <span className="gold-gradient">Unforgettable Event</span>?
-            </h2>
-            <p className="text-text-secondary text-sm sm:text-base md:text-lg mb-8 sm:mb-10">
-              Let our team of expert event planners bring your vision to life with elegance and precision.
-            </p>
+            {/* Decorative border */}
+            <div className="absolute -inset-4 border border-gold/20 rounded-3xl" />
+            <div className="absolute -inset-8 border border-gold/10 rounded-3xl hidden md:block" />
             
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-bg-primary font-semibold uppercase text-sm tracking-wider hover:shadow-gold transition-all duration-300"
-            >
-              Book Your Consultation
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="relative bg-gradient-to-br from-bg-secondary/80 to-bg-primary/80 backdrop-blur-sm p-10 sm:p-12 md:p-16 rounded-2xl border border-gold/30 text-center">
+              {/* Icon */}
+              <motion.div
+                className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gold/10 rounded-2xl mb-6 sm:mb-8"
+                whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-gold" />
+              </motion.div>
+
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 sm:mb-6 leading-tight">
+                Ready to Create Your <br className="hidden sm:block" />
+                <span className="gold-gradient">Unforgettable Event</span>?
+              </h2>
+              
+              <p className="text-text-secondary text-base sm:text-lg md:text-xl mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
+                Let our team of expert event planners bring your vision to life with elegance and precision. 
+                Your perfect moment awaits.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                <Link
+                  href="/contact"
+                  className="group relative px-10 py-5 bg-gradient-to-r from-gold via-gold-light to-gold text-bg-primary font-bold uppercase text-sm tracking-[0.15em] overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(198,164,94,0.5)] w-full sm:w-auto"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Book Your Consultation
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                </Link>
+                
+                <Link
+                  href="/gallery"
+                  className="group px-10 py-5 border-2 border-gold/50 text-gold hover:border-gold hover:bg-gold/5 font-bold uppercase text-sm tracking-[0.15em] transition-all duration-300 w-full sm:w-auto"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    View Our Work
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+                </Link>
+              </div>
+
+              {/* Trust badges */}
+              <motion.div
+                className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-gold/20"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-center gap-2 text-text-secondary text-sm">
+                  <TrendingUp className="w-4 h-4 text-gold" />
+                  <span>Award Winning</span>
+                </div>
+                <div className="flex items-center gap-2 text-text-secondary text-sm">
+                  <Star className="w-4 h-4 text-gold fill-gold" />
+                  <span>5-Star Rated</span>
+                </div>
+                <div className="flex items-center gap-2 text-text-secondary text-sm">
+                  <Users className="w-4 h-4 text-gold" />
+                  <span>500+ Happy Clients</span>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
